@@ -37,4 +37,24 @@ class ImageToPDFConverter:
         
         self.selected_images_listbox.pack(pady=(0, 10), fill=tk.BOTH, expand=True)
 
-  
+    # output pdf name
+        label = tk.Label(self.root, text="Enter output PDF name:")
+        label.pack()
+
+    # input section for user to type in pdf 
+        pdf_name_entry = tk.Entry(self.root, textvariable= self.output_pdf_name, width = 40, justify='center')
+        pdf_name_entry.pack()
+
+    # convert to pdf button
+        convert_button = tk.Button(self.root, text="Coonvert to PDF", command=self.convert_images_to_pdf)
+        convert_button.pack(pady=(20, 40))
+
+    # define the select_image function
+    def select_images(self):
+        # specify what types of images are acceeptable 
+        self.image_paths = filedialog.askopenfilenames(title="Select Images", filetypes=[("Image files", "*.png; *.jpg; *.jpeg")])
+
+        #store the names of the selected images in a variable
+        self.update_selected_images_listbox()
+    
+    
