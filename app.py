@@ -57,4 +57,15 @@ class ImageToPDFConverter:
         #store the names of the selected images in a variable
         self.update_selected_images_listbox()
     
-    
+    def update_selected_images_listbox(self):
+        # check if there are any images selected and delete them
+        self.selected_images_listbox.delete(0, tk.END)
+
+        # write a loop to store the selected images in image_paths
+        for image_path in self.image_paths:
+            #  use split to delete the image paths and just leave the image name
+            _, image_path = os.path.split(image_path)
+
+            self.selected_images_listbox.insert(tk.END, image_path)
+
+  
