@@ -106,3 +106,23 @@ class ImageToPDFConverter:
         
         # save the pdf
         pdf.save()
+
+# define main function to check if the tk component is working
+def main():
+    root = tk.Tk()
+
+    # this is the window name 
+    root.title("Image to PDF")
+
+    #  call out or classname and pass our root so that text from initialize ui function is visivle
+    converter = ImageToPDFConverter(root)
+
+    # this is our window size
+    root.geometry("400x600")
+
+    # define our mainloop
+    root.mainloop()
+
+# initialize our main
+if __name__ == "__main__":
+    main()
