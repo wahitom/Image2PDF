@@ -68,4 +68,41 @@ class ImageToPDFConverter:
 
             self.selected_images_listbox.insert(tk.END, image_path)
 
-  
+    # initialize our convert images to pdf when the convert button is clicked
+    def convert_images_to_pdf(self):
+        # check if user has given any name in the output textbox
+        if not self.image_paths: 
+            return
+        
+        #  default output file name 
+        output_pdf_path = self.output_pdf_name.get() + ".pdf" if self.output_pdf_name.get() else "output.pdf"
+
+        # initialize the page size for the pdf because the normal page size is 600-800px
+        pdf = canvas.Canvas(output_pdf_path, pagesize=(612, 792))
+
+        #  insert images one by one inside the pdf using for loop
+        for image_path in self.image_paths:
+            img = Image.open(image_path)
+
+            # initializing a wdth and height for our image
+            available_width = 540
+            available_height = 720
+
+            #  mean value of our available width by the image width and getting the new width and height
+            scale_factor = min(available_width/ img.width, available_height/ img.height)
+            new_width = img.width * scale_factor
+            new_height = img.height* scale_factor
+
+            # place the image in the center of the page
+            x_centered = (612 - new_width) / 2
+            y_centered = (792 - new_height) / 2
+
+            # Color of the pdf, plecement
+            pdf.setFillColorRGB(255, 255, 255)
+            pdf.rect(0, 0, 612, 792, fill=True)
+
+            pdf.drawInlineImage(img, x_centered, y_centered, width=new_width, height=new_height)
+            pdf.showPage()
+        
+        # save the pdf
+        pdf.save()
