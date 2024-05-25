@@ -22,4 +22,19 @@ class ImageToPDFConverter:
         # for the UI interface
         self.initialize_ui()
 
-   
+    # define the initialize_ui instance
+    # title
+    def initialize_ui(self):
+        # create title for the app
+        title_label = tk.Label(self.root, text="Image to PDF Converter", font=("Arial", 16, "bold"))
+
+        # pack the title_label variables into tkinter
+        title_label.pack(pady=10)
+
+    # select image button
+        select_images_button= tk.Button(self.root, text="Select Image", command=self.select_images)
+        select_images_button.pack(pady=(0, 10 ))
+        
+        self.selected_images_listbox.pack(pady=(0, 10), fill=tk.BOTH, expand=True)
+
+  
